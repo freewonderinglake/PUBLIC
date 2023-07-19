@@ -1808,7 +1808,7 @@ showInfo() {
     encryption=$(echo "$json" | jq -r '.inbounds[0].settings.decryption')
     host=$(echo "$json" | jq -r '.inbounds[0].streamSettings.wsSettings.headers.Host')
     my_hostname=$(hostname)
-    trueip=$(curl ifconfig.co)
+    trueip=$(curl https://toolbox.100030.xyz/ip)
     formatted_ip=$(get_formatted_ip "$trueip")
     # Build the transformed string
     transformed="vless://$id@$formatted_ip:443?path=$encoded_string&security=tls&encryption=$encryption&host=$host&type=ws&sni=$host#$my_hostname"
@@ -1817,7 +1817,6 @@ showInfo() {
     echo -e "   ${BLUE}链接：${PLAIN}${GREEN}${transformed}${PLAIN}"
 
 }
-
 showLog() {
     res=`status`
     if [[ $res -lt 2 ]]; then
@@ -1960,4 +1959,3 @@ case "$action" in
         echo " 用法: `basename $0` [menu|update|uninstall|start|restart|stop|showInfo|showLog]"
         ;;
 esac
-
